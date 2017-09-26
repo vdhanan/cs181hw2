@@ -9,7 +9,7 @@ import org.apache.hadoop.mapreduce.*;
  
 public class Reducer1 extends Reducer<Text, Text, Text, Text> {
 
-	/* TODO - Implement the reduce function. 
+	/* Implement the reduce function. 
 	 * 
 	 * 
 	 * Input :    Adjacency Matrix Format       ->	( j   ,   M  \t  i	\t value 
@@ -36,19 +36,19 @@ public class Reducer1 extends Reducer<Text, Text, Text, Text> {
 			String[] value = strVal.split("\t");
 			
 			if (value[0].equals("V")) {  // vector tuple ("V", value)
-				vVal += Double.parseDouble(value[1]);
+				vVal += Double.parseDouble(value[1]); // add value to vVal
 			}
-			else { // matrix tuple ("M", i, value), add to mList
-				mList.add(strVal);
+			else { // matrix tuple ("M", i, value)
+				mList.add(strVal); // add to mList
 			}
 		}
 		
-		for (String val : mList) { // loop through matrix key-value pairs
+		for (String val : mList) {
 			String[] value = val.split("\t");
-			String i = value[1];
-			String v =  value[2];
-			double vMult = vVal*Double.parseDouble(v);
-			context.write( new Text(i) , new Text(Double.toString(vMult)));
+			String x = value[1];
+			String y =  value[2];
+			double vMult = vVal*Double.parseDouble(y);
+			context.write( new Text(x) , new Text(Double.toString(vMult)));
 		}
 		
 	}

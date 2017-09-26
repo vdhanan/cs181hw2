@@ -22,15 +22,15 @@ public class Reducer2 extends Reducer<Text, Text, Text, Text> {
 	public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
 		
 		
-    	double sum = 0;
+    	double total = 0;
     	
-    	// Iterate through each value for this given key, and compute the sum
-        for (Text v : values) {
-            sum += Double.parseDouble(v.toString());
+    	// Loop through values for given key and compute sum
+        for (Text val : values) {
+            total += Double.parseDouble(val.toString());
         }
         
-        //Output Key and total count for that key
-        context.write(key, new Text (Double.toString(sum)));
+        //Output key and its total
+        context.write(key, new Text (Double.toString(total)));
 				
 	}
 }
